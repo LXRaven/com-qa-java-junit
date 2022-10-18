@@ -22,20 +22,29 @@ public class AppTest {
 		//database connection
 		//configuration
 		//initialization of data
+		//Executed only once before all the test cases
 		System.out.println("@BeforeAll -> setUp ");
 	}
 	
 	@AfterAll
 	public static void cleanUp() {
 		//making the resources null
+		//Executed only once after all the test cases
 		System.out.println("@AfterAll --> cleanUp");
 	}
 	
+	/*
+	 * Executed before each test case
+	 */
 	@BeforeEach
 	public void init() {
+		
 		System.out.println("@BeforeEach -> init");
 	}
 
+	/*
+	 * Executed after each test case
+	 */
 	@AfterEach
 	public void tearDown() {
 		System.out.println("@AfterEach -> tearDown");
