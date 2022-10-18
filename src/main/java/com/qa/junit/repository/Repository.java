@@ -3,6 +3,7 @@ package com.qa.junit.repository;
 import java.util.Arrays;
 import java.util.List;
 
+import com.qa.junit.exception.EmployeeAlreadyExistsException;
 import com.qa.junit.exception.EmployeeNotFoundException;
 import com.qa.junit.exception.InvalidInputException;
 import com.qa.junit.model.Employee;
@@ -33,5 +34,21 @@ public class Repository {
 			valid = true;
 		return valid;
 	}
+	
+	public List<Employee> getAllEmployees(){
+		return this.empList;
+	}
 
+	public void addEmployee(Employee employee) throws EmployeeAlreadyExistsException, InvalidInputException{
+		for (int i=0; i<empList.size(); i++) {
+			if (empList.get(i).getId() == employee.getId() || empList.get(i).getName() == employee.getName()) {
+				throw new EmployeeAlreadyExistsException("This employee already exists");
+			}
+			if (employee.getClass() != Employee.class || employee == null) {
+				throw new InvalidInputException("That is not a valid input for a new employee");
+			}
+		}
+		this.empList.add(employee);
+		System.out.println("Employee "+employee.toString()+" was successfully added!");
+	}
 }
